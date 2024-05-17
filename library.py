@@ -1,4 +1,5 @@
 from customtkinter import *
+from albumFrame import AlbumFrame
 from PIL import Image, ImageTk
 
 library = CTk()
@@ -139,17 +140,12 @@ musicframe.rowconfigure(1, weight=1)
 musicframe.rowconfigure(2, weight=1)
 
 
-album_frame = CTkFrame(master=musicframe,
-                       fg_color="#000000",
-                       height=350,
-                       width=290)
+album_frame = AlbumFrame(master=musicframe, text="za")
 
 album_frame.grid(column=0, row=0)
 
-album_frame = CTkFrame(master=musicframe,
-                       fg_color="#000000",
-                       height=350,
-                       width=290)
+album_frame = AlbumFrame(master=musicframe, text="zazer")
+
 
 album_frame.grid(column=1, row=0)
 

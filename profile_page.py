@@ -25,7 +25,7 @@ username.pack(side="top",
               anchor="w")
 
 
-main_menu_icon_image = Image.open("main_menu_icon.png") 
+main_menu_icon_image = Image.open("./icons/main_menu_icon.png") 
 main_menu_icon_image = main_menu_icon_image.resize((36, 36))
 main_menu_icon_photoimage = ImageTk.PhotoImage(main_menu_icon_image)
 main_menu_button = CTkButton(master=infoframe,
@@ -41,7 +41,7 @@ main_menu_button.pack(side="top",
                       anchor="w")
 
 
-genres_icon_image = Image.open("genres_icon.png")  
+genres_icon_image = Image.open("./icons/genres_icon.png")  
 genres_icon_image = genres_icon_image.resize((38, 38)) 
 genres_icon_photoimage = ImageTk.PhotoImage(genres_icon_image)  
 genres = CTkButton(master=infoframe,
@@ -57,7 +57,7 @@ genres.pack(side="top",
             anchor="w")
 
 
-albums_icon_image = Image.open("albums_icon.png")  
+albums_icon_image = Image.open("./icons/albums_icon.png")  
 albums_icon_image = albums_icon_image.resize((36, 36))  
 albums_icon_photoimage = ImageTk.PhotoImage(albums_icon_image)  
 albums = CTkButton(master=infoframe,
@@ -73,7 +73,7 @@ albums.pack(side="top",
             anchor="w")
 
 
-playlists_icon_image = Image.open("playlists_icon.png")  
+playlists_icon_image = Image.open("./icons/playlists_icon.png")  
 playlists_icon_image = playlists_icon_image.resize((36, 36))  
 playlists_icon_photoimage = ImageTk.PhotoImage(playlists_icon_image) 
 playlists = CTkButton(master=infoframe,
@@ -101,7 +101,7 @@ image_frame = CTkFrame(master=outer_frame, fg_color="transparent", width=200)
 image_frame.pack(side='left', padx=10, fill='y')  
 
 
-profile_photo = Image.open("user_icon.png") 
+profile_photo = Image.open("./icons/user_icon.png") 
 profile_photo = profile_photo.resize((200, 200))
 profile_photo_image = ImageTk.PhotoImage(profile_photo)
 profile_photo_label = CTkLabel(master=image_frame, image=profile_photo_image, fg_color="transparent")

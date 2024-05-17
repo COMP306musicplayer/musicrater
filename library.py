@@ -23,7 +23,7 @@ username.pack(side="top",
               pady=5,
               anchor="w")
 
-profile_icon_image = Image.open("profile_icon.png")
+profile_icon_image = Image.open("./icons/profile_icon.png")
 profile_icon_image = profile_icon_image.resize((36, 36)) 
 profile_icon_photoimage = ImageTk.PhotoImage(profile_icon_image)
 view_profile = CTkButton(master=infoframe,
@@ -38,7 +38,7 @@ view_profile.pack(side="top",
                   fill="x",
                   anchor="w")
 
-genres_icon_image = Image.open("genres_icon.png")
+genres_icon_image = Image.open("./icons/genres_icon.png")
 genres_icon_image = genres_icon_image.resize((38, 38)) 
 genres_icon_photoimage = ImageTk.PhotoImage(genres_icon_image)
 genres = CTkButton(master=infoframe,
@@ -53,7 +53,7 @@ genres.pack(side="top",
                   fill="x",
                   anchor="w")
 
-albums_icon_image = Image.open("albums_icon.png")
+albums_icon_image = Image.open("./icons/albums_icon.png")
 albums_icon_image = albums_icon_image.resize((36, 36)) 
 albums_icon_photoimage = ImageTk.PhotoImage(albums_icon_image)
 albums = CTkButton(master=infoframe,
@@ -68,7 +68,7 @@ albums.pack(side="top",
                   fill="x",
                   anchor="w")
 
-playlists_icon_image = Image.open("playlists_icon.png")
+playlists_icon_image = Image.open("./icons/playlists_icon.png")
 playlists_icon_image = playlists_icon_image.resize((36, 36)) 
 playlists_icon_photoimage = ImageTk.PhotoImage(playlists_icon_image)
 playlists = CTkButton(master=infoframe,
@@ -84,7 +84,7 @@ playlists.pack(side="top",
                   anchor="w")
 
 
-logout_icon_image = Image.open("logout_icon.png")
+logout_icon_image = Image.open("./icons/logout_icon.png")
 logout_icon_image = logout_icon_image.resize((36, 36))
 logout_icon_photoimage = ImageTk.PhotoImage(logout_icon_image)
 logout_label = CTkLabel(master= infoframe,
@@ -96,7 +96,7 @@ logout_label.pack(side="left",
                   pady=5,
                   anchor="s")
 
-settings_icon_image = Image.open("settings_icon.png")
+settings_icon_image = Image.open("./icons/settings_icon.png")
 settings_icon_image = settings_icon_image.resize((36, 36))
 settings_icon_photoimage = ImageTk.PhotoImage(settings_icon_image)
 settings_label = CTkLabel(master= infoframe,
@@ -120,16 +120,40 @@ musicframe.columnconfigure(1, weight=1)
 musicframe.columnconfigure(2, weight=1)
 musicframe.columnconfigure(3, weight=1)
 
+#PUTTING DUMMY FRAMES SO COLUMNS PROTECT THEIR SIZES
+#IF THERE IS NO DUMMY, FRAMES APPEAR IN THE MIDDLE WHEN LESS THAN 4 IN FIRST ROW
+album_frame = CTkFrame(master=musicframe)
+album_frame.grid(column=0, row=0)
+
+album_frame = CTkFrame(master=musicframe)
+album_frame.grid(column=1, row=0)
+
+album_frame = CTkFrame(master=musicframe)
+album_frame.grid(column=2, row=0)
+
+album_frame = CTkFrame(master=musicframe)
+album_frame.grid(column=3, row=0)
+
 musicframe.rowconfigure(0, weight=1)
 musicframe.rowconfigure(1, weight=1)
 musicframe.rowconfigure(2, weight=1)
 
+
 album_frame = CTkFrame(master=musicframe,
                        fg_color="#000000",
-                       height=300,
-                       width=300)
-album_frame.place(x=10,
-                  y=20)
+                       height=350,
+                       width=290)
+
+album_frame.grid(column=0, row=0)
+
+album_frame = CTkFrame(master=musicframe,
+                       fg_color="#000000",
+                       height=350,
+                       width=290)
+
+album_frame.grid(column=1, row=0)
+
+
 
 
 

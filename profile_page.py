@@ -1,6 +1,6 @@
 from customtkinter import *
-from profileFrame import ProfileFrame
-from infoFrame import InfoFrame
+from frames.profileFrame import ProfileFrame
+from frames.infoFrame import InfoFrame
 from PIL import Image, ImageTk
 
 profile_page = CTk()

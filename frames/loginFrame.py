@@ -32,6 +32,8 @@ class LoginFrame(ctk.CTkFrame):
         
         self.login_label.bind("<Button-1>", self.pack_login)
         self.sign_in_label.bind("<Button-1>", self.pack_signin)
+        #self.login_button.bind("<Button-1>", self.change)
+
         
     def pack_login(self, event):
         # Unpack sign-up widgets
@@ -56,13 +58,17 @@ class LoginFrame(ctk.CTkFrame):
         self.password_again.pack(side="top", pady=10, padx=40, fill="x")
         self.signup_button.pack(side="top", pady=50)
         self.login_label.pack(side="right", padx=10, pady=5, anchor="s")
+    '''
+    def change(self, event):
+        print("hey")
+        self.master.geometry("1320x620")
+    '''
 '''
 # Usage example
 root = ctk.CTk()
-app = ctk.CTkFrame(root)
-app.pack(fill="both", expand=True)
 
-login_frame = LoginFrame(master=app)
+
+login_frame = LoginFrame(master=root)
 login_frame.pack()
 
 root.mainloop()

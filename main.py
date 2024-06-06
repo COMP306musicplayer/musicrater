@@ -247,12 +247,12 @@ def getTop10():
 
 
 
-insert_customers = (
+insert_artists = (
     """INSERT INTO ARTISTS (artist_id, artist_fname, artist_mname, artist_lname, artist_genre) VALUES (%s, %s, %s, %s, %s) """
     
 )
 
-populate_table(db_connection, db_cursor, insert_customers, "ARTISTS.csv")
+populate_table(db_connection, db_cursor, insert_artists, "ARTISTS.csv")
   
 
 
@@ -265,12 +265,12 @@ populate_table(db_connection, db_cursor, insert_customers, "ARTISTS.csv")
 # Step 2: Insert Albums
 
 
-insert_customers = (
+insert_albums = (
     """INSERT INTO ALBUMS (album_id, album_title, album_releaseDate, maker_id, album_genre)  VALUES (%s, %s, %s, %s, %s) """
     
 )
 
-populate_table(db_connection, db_cursor, insert_customers, "ALBUMS.csv")
+populate_table(db_connection, db_cursor, insert_albums, "ALBUMS.csv")
 
 
 ### Step 3: Insert Songs
@@ -280,12 +280,12 @@ populate_table(db_connection, db_cursor, insert_customers, "ALBUMS.csv")
 
 
 
-insert_customers = (
+insert_songs = (
     """INSERT INTO SONGS (song_id, song_duration, song_title, song_rating, singer_id, inalbum_id, song_genre)  VALUES (%s, %s, %s, %s, %s,%s,%s) """
     
 )
 
-populate_table(db_connection, db_cursor, insert_customers, "SONGS.csv")
+populate_table(db_connection, db_cursor, insert_songs, "SONGS.csv")
 
 
 

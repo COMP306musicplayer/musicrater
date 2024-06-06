@@ -261,7 +261,7 @@ populate_table(db_connection, db_cursor, insert_customers, "ARTISTS.csv")
 ### Step 2: Insert Albums
 ##Each album should be linked to one of the artists. Since there are 80 albums and 50 artists, some artists will be linked to multiple albums.
 
-##python
+
 # Step 2: Insert Albums
 
 
@@ -276,7 +276,7 @@ populate_table(db_connection, db_cursor, insert_customers, "ALBUMS.csv")
 ### Step 3: Insert Songs
 ##Now, populate the SONGS table with 300 songs. Each song should be linked to one album and one artist. Here, singer_id can be either the same as the album's maker_id or another artist.
 
-##python
+
 
 
 

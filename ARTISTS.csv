@@ -1,0 +1,13 @@
+artist_id,artist_fname,artist_mname,artist_lname,artist_genre
+18aa0ead-0a0d-48d0-83c9-d05724a2abf2,ArtistFirstName1,ArtistMiddleName1,ArtistLastName1,Blues
+d4435f6e-308e-4bbe-8a7b-53ba5f3962d5,ArtistFirstName2,ArtistMiddleName2,ArtistLastName2,Classical
+2117bec7-1cab-4b57-ac83-a49f001e4cdb,ArtistFirstName3,ArtistMiddleName3,ArtistLastName3,Classical
+0f1f2fbd-8312-4554-aa89-d234da865cd4,ArtistFirstName4,ArtistMiddleName4,ArtistLastName4,Pop
+ccf84c94-802b-43b5-aaf0-02065faaefb4,ArtistFirstName5,ArtistMiddleName5,ArtistLastName5,Classical
+f2da3bf4-a927-4c4e-a46b-9c66ab2bcf14,ArtistFirstName6,ArtistMiddleName6,ArtistLastName6,Hip-Hop
+b0d5643a-573a-4f80-936f-528f3ff12604,ArtistFirstName7,ArtistMiddleName7,ArtistLastName7,Country
+4050483a-28f5-43ea-9183-21fe6a27d794,ArtistFirstName8,ArtistMiddleName8,ArtistLastName8,Reggae
+65f7b172-db7d-40a5-9be1-457ae837143c,ArtistFirstName9,ArtistMiddleName9,ArtistLastName9,Folk
+c2a3d5ea-d87b-4db0-b57a-97529f90730b,ArtistFirstName10,ArtistMiddleName10,ArtistLastName10,Reggae
+1d0b4a9e-2cfe-4ac8-bc3a-b5a639d9b28d,ArtistFirstName11,ArtistMiddleName11,ArtistLastName11,Country
+6a49ba1e-c3a8-41d3-a614-b42dfb2dcad5,ArtistFirstName12,ArtistMiddleName12,ArtistLastName12,Pop

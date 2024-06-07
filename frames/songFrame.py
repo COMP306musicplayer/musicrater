@@ -1,86 +1,82 @@
 import customtkinter as ctk
 
-from infoFrame import InfoFrame
+class SongBox(ctk.CTkFrame):
+    def __init__(self, master, song_name, **kwargs):
+        super().__init__(master, **kwargs)
+        
+        self.pack_propagate(False)
+        self.configure(fg_color="#000000")
+        self.song_name = song_name
+        self.master = master
+        
+        # Song name label
+        self.song_label = ctk.CTkLabel(master=self, text=song_name)
+        self.song_label.pack(side="left", padx=10, pady=10)
 
-app = ctk.CTk()
-app.geometry("1320x620")
+        # Rating ComboBox
+        self.rating_combobox = ctk.CTkComboBox(master=self, values=[str(i) for i in range(1, 6)])
+        self.rating_combobox.pack(side="right", padx=10, pady=10)
+        
+        # Rating label
+        self.rating_label = ctk.CTkLabel(master=self, text="Rating:")
+        self.rating_label.pack(side="right", padx=10, pady=10)
+        
 
-info_frame = InfoFrame(master=app)
-info_frame.pack(side="left")
 
-song_frame = ctk.CTkFrame(master=app)
-song_frame.pack(expand="True",
-                fill="both")
-song_frame.pack_propagate(False)
 
-upper_frame = ctk.CTkFrame(master=song_frame,
-                           height=100)
-upper_frame.pack(side="top",
-                 fill="x",)
-upper_frame.pack_propagate(False)
+class SongFrame(ctk.CTkFrame):
+    def __init__(self, master, song_names, kind,**kwargs):
+        super().__init__(master, **kwargs)
+        
+        self.pack_propagate(False)
+        self.song_names = song_names
+        self.master = master
+        self.kind = kind
+        self.create_widgets()
 
-header_label = ctk.CTkLabel(master=upper_frame,
-                            text="ALBUM_OR_GENRE_NAME",
-                            font=("Kanit", 18))
+    def create_widgets(self):
+        for widget in self.winfo_children():
+            widget.destroy()
+        # Upper Frame
+        self.upper_frame = ctk.CTkFrame(master=self, height=100)
+        self.upper_frame.pack(side="top", fill="x")
+        self.upper_frame.pack_propagate(False)
+        
+        self.header_label = ctk.CTkLabel(master=self.upper_frame,
+                                         text=f"{self.kind}",
+                                         font=("Kanit", 18))
+        self.header_label.pack(side="top", anchor="nw", padx=10)
 
-header_label.pack(side="top",
-                  anchor="nw",
-                  padx=10)
+        self.details_label = ctk.CTkLabel(master=self.upper_frame,
+                                          text=f"{len(self.song_names)} songs",
+                                          font=("Kanit", 10))
+        self.details_label.pack(side="top", anchor="nw", padx=10)
 
-details_label = ctk.CTkLabel(master=upper_frame,
-                             text="Various Artists * 37 songs * 4.3 rating",
-                             font=("Kanit", 10))
-details_label.pack(side="top",
-                   anchor="nw",
-                   padx=10)
+        self.search_by_name = ctk.CTkEntry(master=self.upper_frame,
+                                           placeholder_text="Search by name")
+        self.search_by_name.pack(side="left", anchor="s", padx=10, pady=10)
 
-search_by_name = ctk.CTkEntry(master=upper_frame,
-                              placeholder_text="Search by name")
-search_by_name.pack(side="left",
-                    anchor="s",
-                    padx=10,
-                    pady=10)
+        self.search_btn = ctk.CTkButton(master=self.upper_frame,
+                                        text="Search",
+                                        font=("Kanit", 12),
+                                        width=50)
+        self.search_btn.pack(side="left", anchor="s", pady=10)
 
-search_btn = ctk.CTkButton(master=upper_frame,
-                           text="Search",
-                           font=("Kanit", 12),
-                           width=50)
-search_btn.pack(side="left",
-                anchor="s",
-                pady=10)
+        # Scrollable Frame for Songs
+        self.scroll_songs = ctk.CTkScrollableFrame(master=self)
+        self.scroll_songs.pack(expand=True, fill="both")
+        self.scroll_songs.columnconfigure(0, weight=1)
 
-scroll_songs = ctk.CTkScrollableFrame(master=song_frame)
-scroll_songs.pack(expand=True,
-                  fill="both")
+        # Add Song Boxes
+        for i, song_name in enumerate(self.song_names):
+            song_box = SongBox(master=self.scroll_songs,
+                               song_name=song_name,
+                               height=70,
+                               fg_color="#e0e0e0")
+            song_box.grid(row=i, column=0, sticky="we")
 
-scroll_songs.columnconfigure(0, weight=1)
-
-song_box = ctk.CTkFrame(master=scroll_songs,
-                        height=70,
-                        fg_color="#234234")
-
-song_box.grid(row=0, column=0,
-              sticky="we")
-
-song_box = ctk.CTkFrame(master=scroll_songs,
-                        height=70,
-                        fg_color="#123789")
-
-song_box.grid(row=1, column=0,
-              sticky="we")
-
-song_box = ctk.CTkFrame(master=scroll_songs,
-                        height=70,
-                        fg_color="#234789")
-
-song_box.grid(row=2, column=0,
-              sticky="we")
-
-song_box = ctk.CTkFrame(master=scroll_songs,
-                        height=70,
-                        fg_color="#234546")
-
-song_box.grid(row=3, column=0,
-              sticky="we")
-
-app.mainloop()
+if __name__ == "__main__":
+    app = ctk.CTk()
+    song_frame = SongFrame(master=app, song_names=[], kind="")
+    song_frame.pack(expand=True, fill="both")
+    app.mainloop()

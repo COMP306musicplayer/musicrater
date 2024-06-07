@@ -20,6 +20,3 @@ class AlbumFrame(ctk.CTkFrame):
         self.album_image.pack(side="top")
         self.album_name.pack(side="bottom")
 
-    def returntext(self, event):
-         print(self.text)
-         return self.text

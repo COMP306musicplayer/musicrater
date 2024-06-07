@@ -2,7 +2,9 @@ from customtkinter import *
 from frames.loginFrame import LoginFrame
 from frames.infoFrame import InfoFrame
 from frames.profileFrame import ProfileFrame
-from frames.albumFramesPage import AlbumsPagesFrame
+from frames.albumFramesPage import AlbumFramesPage
+from frames.albumFrame import AlbumFrame
+from frames.songFrame import SongFrame
 
 
 
@@ -128,100 +130,102 @@ def getTop10():
     
     return records
 
-def login(event):
-    app.geometry("1320x620")
-    login_frame.pack_forget()
-    info_frame.pack(side="left")
-    #profile_frame.pack(side="right", fill="both", expand=True)
-    albums_frame.pack(side="right", fill="both", expand=True)
+class AppFrame(CTk):
+
+    def __init__(self):
+        super().__init__()
+        self.geometry("770x750")
+        set_default_color_theme("./color_themes/NightTrain.json")
+
+        self.db_connection = self.connect_to_db()
+        self.db_cursor = self.db_connection.cursor(buffered=True)
+        self.db_cursor.execute("USE ratingApp")
+
+        self.login_frame = LoginFrame(master=self)
+        self.info_frame = InfoFrame(master=self)
+        self.profile_frame = ProfileFrame(master=self)
+        self.albums_frame = AlbumFramesPage(master=self, kind="albums", array=self.get_album_names(), app_frame=self)
+        self.genres_frame = AlbumFramesPage(master=self, kind="genres", array=self.get_album_genres(), app_frame=self)
+        self.playlists_frame = AlbumFramesPage(master=self, kind="playlists", array=self.get_album_names(), app_frame=self)
+        self.song_frame = SongFrame(master=self, song_names=[], kind="")
+
+        self.setup_bindings()
+
+        self.login_frame.pack(anchor=CENTER, pady=40)
+
+    def connect_to_db(self):
+        return mysql.connector.connect(
+            host="localhost",
+            user="root",
+            passwd="1234", 
+            auth_plugin='mysql_native_password'
+        )
+
+    def get_album_names(self):
+        query_album_names = "SELECT album_title FROM ALBUMS"
+        self.db_cursor.execute(query_album_names)
+        album_names_tuples = self.db_cursor.fetchall()
+        return [name[0] for name in album_names_tuples]
+
+    def get_album_genres(self):
+        query_album_genres = "SELECT DISTINCT album_genre FROM ALBUMS"
+        self.db_cursor.execute(query_album_genres)
+        album_genres_tuples = self.db_cursor.fetchall()
+        return [genre[0] for genre in album_genres_tuples]
+
+    def login(self, event):
+        self.geometry("1620x620")
+        self.login_frame.pack_forget()
+        self.info_frame.pack(side="left")
+        self.albums_frame.pack(side="right", fill="both", expand=True)
+
+    def logout(self, event):
+        self.geometry("770x750")
+        self.profile_frame.pack_forget()
+        self.info_frame.pack_forget()
+        self.login_frame.pack()
+
+    def albums(self, event):
+        self.profile_frame.pack_forget()
+        self.genres_frame.pack_forget()
+        self.playlists_frame.pack_forget()
+        self.song_frame.pack_forget()
+        self.albums_frame.pack(side="right", fill="both", expand=True)
+
+    def profile(self, event):
+        self.albums_frame.pack_forget()
+        self.genres_frame.pack_forget()
+        self.playlists_frame.pack_forget()
+        self.song_frame.pack_forget()
+        self.profile_frame.pack(side="right", fill="both", expand=True)
+
+    def genres(self, event):
+        self.albums_frame.pack_forget()
+        self.profile_frame.pack_forget()
+        self.playlists_frame.pack_forget()
+        self.song_frame.pack_forget()
+        self.genres_frame.pack(side="right", fill="both", expand=True)
+
+    def playlists(self, event):
+        self.albums_frame.pack_forget()
+        self.genres_frame.pack_forget()
+        self.profile_frame.pack_forget()
+        self.song_frame.pack_forget()
+        self.playlists_frame.pack(side="right", fill="both", expand=True)
+
+    def setup_bindings(self):
+        self.login_frame.login_button.bind("<Button-1>", self.login)
+        self.info_frame.logout_label.bind("<Button-1>", self.logout)
+        self.info_frame.view_profile.bind("<Button-1>", self.profile)
+        self.info_frame.albums.bind("<Button-1>", self.albums)
+        self.info_frame.genres.bind("<Button-1>", self.genres)
+        self.info_frame.playlists.bind("<Button-1>", self.playlists)
+
+if __name__ == "__main__":
+    app = AppFrame()
+    app.mainloop()
 
 
-def logout(event):
-    app.geometry("770x750")
-    profile_frame.pack_forget()
-    info_frame.pack_forget()
-    login_frame.pack()
-
-def albums(event):
-    profile_frame.pack_forget()
-    genres_frame.pack_forget()
-    playlists_frame.pack_forget()
-    albums_frame.pack(side="right", fill="both", expand=True)
-
-def profile(event):
-    albums_frame.pack_forget()
-    genres_frame.pack_forget()
-    playlists_frame.pack_forget()
-    profile_frame.pack(side="right", fill="both", expand=True)
-
-def genres(event):
-    albums_frame.pack_forget()
-    profile_frame.pack_forget()
-    playlists_frame.pack_forget()
-    genres_frame.pack(side="right", fill="both", expand=True)
 
 
-def playlists(event):
-    albums_frame.pack_forget()
-    genres_frame.pack_forget()
-    profile_frame.pack_forget()
-    playlists_frame.pack(side="right", fill="both", expand=True)
-
-
-
-app = CTk()
-app.geometry("770x750")
-
-set_default_color_theme("./color_themes/NightTrain.json")
-
-login_frame = LoginFrame(master=app)
-
-login_frame.pack(anchor=CENTER,
-                 pady=40)
-
-
-
-# Query to get all album names
-query_album_names = "SELECT album_title FROM ALBUMS"
-db_cursor.execute(query_album_names)
-album_names_tuples = db_cursor.fetchall()
-
-# Extract album names from tuples
-album_names = [name[0] for name in album_names_tuples]
-
-
-# Query to get all unique album genres
-query_album_genres = "SELECT DISTINCT album_genre FROM ALBUMS"
-db_cursor.execute(query_album_genres)
-album_genres_tuples = db_cursor.fetchall()
-
-# Extract album genres from tuples
-album_genres = [genre[0] for genre in album_genres_tuples]
-
-info_frame = InfoFrame(master=app)
-profile_frame = ProfileFrame(master=app)
-albums_frame = AlbumsPagesFrame(master=app,
-                                kind="Albums",
-                                array=album_names)
-genres_frame = AlbumsPagesFrame(master=app,
-                                kind="genres",
-                                array=album_genres)
-playlists_frame = AlbumsPagesFrame(master=app,
-                                   kind="playlists",
-                                   array=album_names)
-
-
-
-login_frame.login_button.bind("<Button-1>", login)
-info_frame.logout_label.bind("<Button-1>",  logout)
-info_frame.view_profile.bind("<Button-1>", profile)
-info_frame.albums.bind("<Button-1>", albums)
-info_frame.genres.bind("<Button-1>", genres)
-info_frame.playlists.bind("<Button-1>", playlists)
-
-
-
-
-
-
-app.mainloop()
+                            
